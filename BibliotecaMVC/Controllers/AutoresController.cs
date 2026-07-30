@@ -5,9 +5,7 @@ namespace BibliotecaMVC.Controllers
 {
     public class AutoresController : Controller
     {
-        public IActionResult Index()
-        {
-            List<Autor> autores = new List<Autor>()
+        private static List<Autor> _autores = new List<Autor>()
             {
                 new Autor
                 {
@@ -15,7 +13,7 @@ namespace BibliotecaMVC.Controllers
                     Nombre = "Gabriel",
                     Apellido = "García Márquez",
                     Nacionalidad = "Colombiana",
-                    Fecha_de_Nacimiento = new DateOnly(1927, 3, 6),
+                    FechaNacimiento = new DateTime(1927, 3, 6),
                     Activo = true
                 },
                 new Autor
@@ -24,7 +22,7 @@ namespace BibliotecaMVC.Controllers
                     Nombre = "Jane",
                     Apellido = "Austen",
                     Nacionalidad = "Británica",
-                    Fecha_de_Nacimiento = new DateOnly(1775, 12, 16),
+                    FechaNacimiento = new DateTime(1775, 12, 16),
                     Activo = false
                 },
                 new Autor
@@ -33,7 +31,7 @@ namespace BibliotecaMVC.Controllers
                     Nombre = "Ernest",
                     Apellido = "Hermingway",
                     Nacionalidad = "Estadounidense",
-                    Fecha_de_Nacimiento = new DateOnly(1899, 7, 21),
+                    FechaNacimiento = new DateTime(1899, 7, 21),
                     Activo = false
                 },
                 new Autor
@@ -42,7 +40,7 @@ namespace BibliotecaMVC.Controllers
                     Nombre = "Isabel",
                     Apellido = "Allende",
                     Nacionalidad = "Chilena",
-                    Fecha_de_Nacimiento = new DateOnly(1942, 8, 2),
+                    FechaNacimiento = new DateTime(1942, 8, 2),
                     Activo = true
                 },
                 new Autor
@@ -51,14 +49,54 @@ namespace BibliotecaMVC.Controllers
                     Nombre = "Víctor",
                     Apellido = "Hugo",
                     Nacionalidad = "Colombiana",
-                    Fecha_de_Nacimiento = new DateOnly(1802, 2, 26),
+                    FechaNacimiento = new DateTime(1802, 2, 26),
                     Activo = false
                 }
             };
 
-            ViewBag.Autores = autores;
+        public IActionResult Index()
+        {
+            return View(_autores);
+        }
 
+        public IActionResult Details(int id)
+        {
+            var autor = _autores.FirstOrDefault(x => x.ID == id);
+
+            if (autor == null)
+            {
+                return NotFound();
+            }
+
+            return View(autor);
+        }
+
+        public IActionResult Create()
+        {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Autor autor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(autor);
+            }
+
+            if (_autores.Any())
+            {
+                autor.ID = _autores.Max(x => x.ID) + 1;
+            }
+            else
+            {
+                autor.ID = 1;
+            }
+
+            _autores.Add(autor);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
