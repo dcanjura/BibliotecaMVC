@@ -1,0 +1,34 @@
+@model BibliotecaMVC.Models.Libro
+
+@{
+    ViewData["Title"] = "Detalle del Libro";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="card mb-3 libro-detalle">
+    <div class="row g-0">
+        @if (!string.IsNullOrWhiteSpace(Model.Imagen))
+        {
+            <div class="col-md-4">
+                <img src="~/images/@Model.Imagen" class="img-fluid rounded-start"
+                     alt="Imagen representativa de @Model.Titulo" />
+            </div>
+        }
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title">@Model.Titulo</h2>
+                <p><strong>Autor:</strong> @Model.Autor</p>
+                <p><strong>Categoría:</strong> @Model.Categoria</p>
+                <p><strong>Precio:</strong> @Model.Precio.ToString("C")</p>
+                <p>
+                    <strong>Estado:</strong>
+                    <span class="badge @(Model.Disponible ? "bg-success" : "bg-danger")">
+                        @(Model.Disponible ? "Disponible" : "Prestado")
+                    </span>
+                </p>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.ID">Editar</a>
+                <a class="btn btn-secondary" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

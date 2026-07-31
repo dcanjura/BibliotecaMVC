@@ -1,0 +1,33 @@
+@model BibliotecaMVC.Models.Libro
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="mb-3">
+    <label asp-for="Titulo" class="form-label"></label>
+    <input asp-for="Titulo" class="form-control" />
+    <span asp-validation-for="Titulo" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Autor" class="form-label"></label>
+    <input asp-for="Autor" class="form-control" />
+    <span asp-validation-for="Autor" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Categoria" class="form-label"></label>
+    <input asp-for="Categoria" class="form-control" />
+    <span asp-validation-for="Categoria" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Precio" class="form-label"></label>
+    <input asp-for="Precio" class="form-control" type="number" min="0.01" step="0.01" />
+    <span asp-validation-for="Precio" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Imagen" class="form-label"></label>
+    <input asp-for="Imagen" class="form-control" placeholder="Ejemplo: clean-code.png" />
+    <div class="form-text">La imagen debe existir dentro de wwwroot/images.</div>
+    <span asp-validation-for="Imagen" class="text-danger"></span>
+</div>
+<div class="form-check mb-3">
+    <input asp-for="Disponible" class="form-check-input" />
+    <label asp-for="Disponible" class="form-check-label"></label>
+</div>

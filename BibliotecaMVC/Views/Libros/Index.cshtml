@@ -1,42 +1,42 @@
-﻿@using BibliotecaMVC.Models
+@model IEnumerable<BibliotecaMVC.Models.Libro>
 
 @{
-    List<Libro> libros = ViewBag.Libros;
+    ViewData["Title"] = "Catálogo de Libros";
 }
 
-<h2>Catálogo de Libros</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1>@ViewData["Title"]</h1>
+        <p class="text-muted">Hay @Model.Count() libros registrados</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Create">Nuevo Libro</a>
+</div>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var libro in libros)
-        {
-            <tr>
-                <td>@libro.ID</td>
-                <td>@libro.Titulo</td>
-                <td>@libro.Autor</td>
-                <td>@libro.Categoria</td>
-                <td>$@libro.Precio</td>
-                <td>
-                    @if (@libro.Disponible)
-                    {
-                        <spam class="badge bg-success">Disponible</spam>
-                    }
-                    else
-                    {
-                        <spam class="badge bg-danger">Prestado</spam>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @foreach (var libro in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                @if (!string.IsNullOrWhiteSpace(libro.Imagen))
+                {
+                    <img src="~/images/@libro.Imagen" class="card-img-top libro-portada"
+                         alt="Imagen representativa de @libro.Titulo" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@libro.Titulo</h5>
+                    <p class="card-text mb-1"><strong>Autor:</strong> @libro.Autor</p>
+                    <p class="card-text mb-1"><strong>Categoría:</strong> @libro.Categoria</p>
+                    <p class="card-text"><strong>Precio:</strong> @libro.Precio.ToString("C")</p>
+                    <span class="badge @(libro.Disponible ? "bg-success" : "bg-danger")">
+                        @(libro.Disponible ? "Disponible" : "Prestado")
+                    </span>
+                </div>
+                <div class="card-footer bg-white">
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@libro.ID">Ver</a>
+                    <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@libro.ID">Editar</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@libro.ID">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

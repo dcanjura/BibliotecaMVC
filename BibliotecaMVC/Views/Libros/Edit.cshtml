@@ -1,0 +1,17 @@
+@model BibliotecaMVC.Models.Libro
+
+@{
+    ViewData["Title"] = "Editar Libro";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Edit" method="post">
+    <input asp-for="ID" type="hidden" />
+    <partial name="_Form" model="Model" />
+    <button type="submit" class="btn btn-warning">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

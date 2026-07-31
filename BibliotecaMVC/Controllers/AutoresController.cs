@@ -98,5 +98,59 @@ namespace BibliotecaMVC.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Edit(int id)
+        {
+            var autor = _autores.FirstOrDefault(x => x.ID == id);
+            return autor == null ? NotFound() : View(autor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Autor autor)
+        {
+            if (id != autor.ID)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(autor);
+            }
+
+            var existente = _autores.FirstOrDefault(x => x.ID == id);
+            if (existente == null)
+            {
+                return NotFound();
+            }
+
+            existente.Nombre = autor.Nombre;
+            existente.Apellido = autor.Apellido;
+            existente.Nacionalidad = autor.Nacionalidad;
+            existente.FechaNacimiento = autor.FechaNacimiento;
+            existente.Activo = autor.Activo;
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var autor = _autores.FirstOrDefault(x => x.ID == id);
+            return autor == null ? NotFound() : View(autor);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var autor = _autores.FirstOrDefault(x => x.ID == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
+
+            _autores.Remove(autor);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

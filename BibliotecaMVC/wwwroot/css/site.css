@@ -20,3 +20,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.libro-portada {
+  height: 340px;
+  object-fit: cover;
+}
+
+.libro-detalle img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+}

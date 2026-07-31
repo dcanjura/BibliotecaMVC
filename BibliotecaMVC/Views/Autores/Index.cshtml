@@ -15,11 +15,17 @@
         <div class="col-md-6">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5>@autor.Nombre</h5>
+                    <h5>@autor.Nombre @autor.Apellido</h5>
                     <h6>@autor.Nacionalidad</h6>
                     <p>Edad: @(DateTime.Now.Year - autor.FechaNacimiento.Year)</p>
-
-                    <a asp-action="Details" asp-route-id="@autor.ID">Ver</a>
+                    <span class="badge @(autor.Activo ? "bg-success" : "bg-secondary")">
+                        @(autor.Activo ? "Activo" : "Inactivo")
+                    </span>
+                    <div class="mt-3">
+                        <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@autor.ID">Ver</a>
+                        <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@autor.ID">Editar</a>
+                        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@autor.ID">Eliminar</a>
+                    </div>
                 </div>
             </div>
         </div>
