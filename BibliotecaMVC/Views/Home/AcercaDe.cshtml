@@ -1,8 +1,63 @@
-﻿@{
-    ViewData["Title"] = "AcercaDe";
+@{
+    ViewData["Title"] = "Acerca de";
 }
 
-<div class="text-center">
-    <h1>Gestión de Acerca de</h1>
-    <p>En este módulo se administrará el Acerca de</p>
+<div class="pagina-acerca">
+    <header class="acerca-encabezado">
+        <h1>Acerca de la Biblioteca Virtual</h1>
+        <p>Un espacio sencillo para consultar libros, autores y servicios bibliotecarios.</p>
+    </header>
+
+    <section class="acerca-contenido">
+        <article>
+            <h2>Nuestra biblioteca</h2>
+            <p>
+                La Biblioteca Virtual fue creada para facilitar la consulta de libros y organizar
+                la información de autores, categorías y préstamos.
+            </p>
+            <p>
+                Este proyecto permite practicar el desarrollo de aplicaciones web con ASP.NET Core MVC,
+                HTML5 y CSS3.
+            </p>
+        </article>
+
+        <article>
+            <h2>Servicios disponibles</h2>
+            <ul>
+                <li>Consulta del catálogo de libros.</li>
+                <li>Información de autores.</li>
+                <li>Organización por categorías.</li>
+                <li>Control básico de préstamos.</li>
+            </ul>
+        </article>
+
+        <aside class="acerca-nota">
+            <h2>Objetivo</h2>
+            <p>Ofrecer una forma clara y rápida de acceder a la información de la biblioteca.</p>
+        </aside>
+
+        <article class="acerca-mision">
+            <h2>Misión</h2>
+            <p>
+                Facilitar el acceso a libros, autores y servicios bibliotecarios mediante una
+                plataforma sencilla y ordenada.
+            </p>
+        </article>
+
+        <article class="acerca-vision">
+            <h2>Visión</h2>
+            <p>
+                Ser una biblioteca virtual útil para estudiantes y lectores que buscan información
+                de manera rápida desde cualquier dispositivo.
+            </p>
+        </article>
+    </section>
+
+    <section>
+        <figure class="acerca-imagen">
+        <img src="https://picsum.photos/900/350?random=@DateTime.Now.Ticks"
+             alt="Imagen aleatoria de Lorem Picsum" />
+        <figcaption>Biblioteca virtual desarollada con ASP.NET Core MVC</figcaption>
+    </figure>
+    </section>
 </div>

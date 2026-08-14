@@ -1,8 +1,82 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1>Sistema de Gestión de Biblioteca</h1>
-    <p>Bienvenidos al sistema desarrollado con ASP.NET CORE MVC</p>
+<section class="bg-light p-4 p-md-5 rounded-3 mb-4 text-center">
+    <h1 class="display-5">Biblioteca Virtual</h1>
+    <p class="lead">Consulta libros, conoce autores y encuentra nuevas lecturas.</p>
+    <a class="btn btn-primary me-2" asp-controller="Libros" asp-action="Index">Ver libros</a>
+    <a class="btn btn-outline-secondary" asp-controller="Autores" asp-action="Index">Ver autores</a>
+</section>
+
+<div class="alert alert-info" role="alert">
+    <strong>Información:</strong> Revisa la disponibilidad de los libros antes de solicitar un préstamo.
 </div>
+
+<section class="mb-5">
+    <h2 class="text-center mb-4">Servicios de la biblioteca</h2>
+    <div class="row g-4">
+        <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <span class="badge bg-primary mb-2">Catálogo</span>
+                    <h3 class="h5 card-title">Libros</h3>
+                    <p class="card-text">Consulta los libros registrados, su categoría y disponibilidad.</p>
+                    <a class="btn btn-sm btn-primary" asp-controller="Libros" asp-action="Index">Consultar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <span class="badge bg-success mb-2">Información</span>
+                    <h3 class="h5 card-title">Autores</h3>
+                    <p class="card-text">Conoce información básica de los autores incluidos en la biblioteca.</p>
+                    <a class="btn btn-sm btn-success" asp-controller="Autores" asp-action="Index">Consultar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <span class="badge bg-warning text-dark mb-2">Servicio</span>
+                    <h3 class="h5 card-title">Préstamos</h3>
+                    <p class="card-text">Consulta la sección de préstamos y el estado de los libros solicitados.</p>
+                    <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Prestamos">Consultar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mb-4">
+    <h2 class="text-center mb-4">Preguntas frecuentes</h2>
+    <div class="accordion" id="preguntasBiblioteca">
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#preguntaUno">
+                    ¿Cómo puedo buscar un libro?
+                </button>
+            </h3>
+            <div id="preguntaUno" class="accordion-collapse collapse show" data-bs-parent="#preguntasBiblioteca">
+                <div class="accordion-body">
+                    Ingresa al módulo Libros para consultar el catálogo disponible.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#preguntaDos">
+                    ¿Qué información puedo consultar?
+                </button>
+            </h3>
+            <div id="preguntaDos" class="accordion-collapse collapse" data-bs-parent="#preguntasBiblioteca">
+                <div class="accordion-body">
+                    Puedes consultar títulos, autores, categorías, precios y disponibilidad.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
