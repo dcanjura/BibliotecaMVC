@@ -9,7 +9,7 @@
     </header>
 
     <section class="acerca-contenido">
-        <article>
+        <article class="tarjeta-reutilizable">
             <h2>Nuestra biblioteca</h2>
             <p>
                 La Biblioteca Virtual fue creada para facilitar la consulta de libros y organizar
@@ -21,7 +21,7 @@
             </p>
         </article>
 
-        <article>
+        <article class="tarjeta-reutilizable">
             <h2>Servicios disponibles</h2>
             <ul>
                 <li>Consulta del catálogo de libros.</li>
@@ -31,12 +31,12 @@
             </ul>
         </article>
 
-        <aside class="acerca-nota">
+        <aside class="acerca-nota tarjeta-reutilizable">
             <h2>Objetivo</h2>
             <p>Ofrecer una forma clara y rápida de acceder a la información de la biblioteca.</p>
         </aside>
 
-        <article class="acerca-mision">
+        <article class="acerca-mision tarjeta-reutilizable">
             <h2>Misión</h2>
             <p>
                 Facilitar el acceso a libros, autores y servicios bibliotecarios mediante una
@@ -44,7 +44,7 @@
             </p>
         </article>
 
-        <article class="acerca-vision">
+        <article class="acerca-vision tarjeta-reutilizable">
             <h2>Visión</h2>
             <p>
                 Ser una biblioteca virtual útil para estudiantes y lectores que buscan información
@@ -60,4 +60,28 @@
         <figcaption>Biblioteca virtual desarollada con ASP.NET Core MVC</figcaption>
     </figure>
     </section>
+
+    <section class="valores-biblioteca">
+        <h2>Nuestros valores</h2>
+        <div class="valores-flex">
+            <article class="tarjeta-reutilizable valor-item">
+                <h3>Acceso</h3>
+                <p>La información debe ser fácil de consultar para todos los usuarios.</p>
+            </article>
+            <article class="tarjeta-reutilizable valor-item">
+                <h3>Organización</h3>
+                <p>Los libros y autores se presentan de una manera clara y ordenada.</p>
+            </article>
+            <article class="tarjeta-reutilizable valor-item">
+                <h3>Aprendizaje</h3>
+                <p>La lectura ayuda a desarrollar nuevos conocimientos y habilidades.</p>
+            </article>
+        </div>
+    </section>
+
+    <aside class="mensaje-final">
+        <h2>Un espacio para lectores</h2>
+        <p>La Biblioteca Virtual continúa creciendo para ofrecer una mejor experiencia de consulta.</p>
+        <a class="btn btn-light" asp-controller="Libros" asp-action="Index">Explorar libros</a>
+    </aside>
 </div>

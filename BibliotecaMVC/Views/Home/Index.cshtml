@@ -13,11 +13,19 @@
     <strong>Información:</strong> Revisa la disponibilidad de los libros antes de solicitar un préstamo.
 </div>
 
-<section class="mb-5">
+<section class="resumen-biblioteca mb-5" aria-label="Resumen de la biblioteca">
+    <div><strong>Libros</strong><span>Catálogo variado</span></div>
+    <div><strong>Autores</strong><span>Información organizada</span></div>
+    <div><strong>Préstamos</strong><span>Consulta de disponibilidad</span></div>
+</section>
+
+<section class="mb-5 seccion-servicios">
     <h2 class="text-center mb-4">Servicios de la biblioteca</h2>
-    <div class="row g-4">
-        <div class="col-12 col-md-4">
+    <div class="servicios-flex">
+        <div class="servicio-item">
             <div class="card h-100 shadow-sm">
+                <img src="https://picsum.photos/200/100?random=libros-@DateTime.Now.Ticks"
+                     class="imagen-servicio" alt="Imagen aleatoria para libros" />
                 <div class="card-body">
                     <span class="badge bg-primary mb-2">Catálogo</span>
                     <h3 class="h5 card-title">Libros</h3>
@@ -27,8 +35,10 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-4">
+        <div class="servicio-item">
             <div class="card h-100 shadow-sm">
+                <img src="https://picsum.photos/200/100?random=autores-@DateTime.Now.Ticks"
+                     class="imagen-servicio" alt="Imagen aleatoria para autores" />
                 <div class="card-body">
                     <span class="badge bg-success mb-2">Información</span>
                     <h3 class="h5 card-title">Autores</h3>
@@ -38,8 +48,10 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-4">
+        <div class="servicio-item">
             <div class="card h-100 shadow-sm">
+                <img src="https://picsum.photos/200/100?random=prestamos-@DateTime.Now.Ticks"
+                     class="imagen-servicio" alt="Imagen aleatoria para préstamos" />
                 <div class="card-body">
                     <span class="badge bg-warning text-dark mb-2">Servicio</span>
                     <h3 class="h5 card-title">Préstamos</h3>
@@ -49,6 +61,41 @@
             </div>
         </div>
     </div>
+</section>
+
+<section class="mb-5">
+    <h2 class="text-center mb-4">Explora la biblioteca</h2>
+    <div class="biblioteca-grid">
+        <article class="grid-elemento">
+            <h3>Literatura</h3>
+            <p>Encuentra novelas, cuentos y obras de diferentes autores.</p>
+        </article>
+        <article class="grid-elemento">
+            <h3>Programación</h3>
+            <p>Consulta libros relacionados con tecnología y desarrollo web.</p>
+        </article>
+        <article class="grid-elemento">
+            <h3>Autores</h3>
+            <p>Conoce la información principal de los autores registrados.</p>
+        </article>
+        <article class="grid-elemento">
+            <h3>Lectura</h3>
+            <p>Descubre nuevas opciones para aprender y disfrutar leyendo.</p>
+        </article>
+    </div>
+</section>
+
+<section class="pasos-biblioteca mb-5">
+    <div class="pasos-texto">
+        <span class="badge bg-success mb-2">Biblioteca Virtual</span>
+        <h2>¿Cómo utilizar el sistema?</h2>
+        <p>Explora el catálogo, revisa los detalles y consulta si el libro está disponible.</p>
+    </div>
+    <ol class="lista-pasos">
+        <li>Selecciona un módulo del menú.</li>
+        <li>Consulta la información registrada.</li>
+        <li>Revisa el estado de cada libro.</li>
+    </ol>
 </section>
 
 <section class="mb-4">
