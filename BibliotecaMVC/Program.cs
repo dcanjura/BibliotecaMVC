@@ -1,4 +1,5 @@
 using BibliotecaMVC.Services;
+using BibliotecaMVC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddControllersWithViews();
 // Registro Scoped. Cambie AutorServiceAlternativo por AutorService para
 // usar la otra implementación sin modificar AutoresController.
 builder.Services.AddScoped<IAutorService, AutorServiceAlternativo>();
+builder.Services.AddScoped<CategoriaRepository>();
 
 var app = builder.Build();
 
