@@ -31,10 +31,8 @@
                         @(libro.Disponible ? "Disponible" : "Prestado")
                     </span>
                 </div>
-                <div class="card-footer bg-white">
-                    <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@libro.ID">Ver</a>
-                    <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@libro.ID">Editar</a>
-                    <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@libro.ID">Eliminar</a>
+                <div class="card-footer bg-white text-muted small">
+                    Libro registrado en la Biblioteca Virtual
                 </div>
             </div>
         </div>
