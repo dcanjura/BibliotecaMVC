@@ -1,5 +1,6 @@
 using BibliotecaMVC.Services;
 using BibliotecaMVC.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddControllersWithViews();
 // usar la otra implementación sin modificar AutoresController.
 builder.Services.AddScoped<IAutorService, AutorServiceAlternativo>();
 builder.Services.AddScoped<CategoriaRepository>();
+builder.Services.AddDbContext<BibliotecaDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BibliotecaConexion")));
 
 var app = builder.Build();
 
