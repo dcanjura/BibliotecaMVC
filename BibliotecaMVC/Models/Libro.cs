@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BibliotecaMVC.Models
 {
     public class Libro
     {
+        [Key]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "El título es obligatorio.")]
@@ -19,11 +21,13 @@ namespace BibliotecaMVC.Models
         public string Categoria { get; set; } = string.Empty;
 
         [Range(0.01, 100000, ErrorMessage = "El precio debe ser mayor que cero.")]
+        [Column(TypeName = "decimal(10,2)")]
         public decimal Precio { get; set; }
 
         public bool Disponible { get; set; }
 
         [Display(Name = "Nombre de la imagen")]
+        [StringLength(150)]
         public string Imagen { get; set; } = string.Empty;
     }
 }
