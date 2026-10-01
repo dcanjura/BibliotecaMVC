@@ -106,6 +106,15 @@ body {
   object-fit: cover;
 }
 
+.libro-sin-imagen {
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  background-color: #f1f3f5;
+}
+
 .libro-detalle img {
   width: 100%;
   max-height: 520px;

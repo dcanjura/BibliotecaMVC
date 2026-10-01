@@ -36,6 +36,64 @@ namespace BibliotecaMVC.Controllers
             _context.Libros.Add(libro);
             _context.SaveChanges();
 
+            TempData["Mensaje"] = "Libro agregado correctamente.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var libro = _context.Libros.Find(id);
+            return libro == null ? NotFound() : View(libro);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Libro libro)
+        {
+            if (id != libro.ID)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(libro);
+            }
+
+            var libroExistente = _context.Libros.Find(id);
+            if (libroExistente == null)
+            {
+                return NotFound();
+            }
+
+            _context.Libros.Update(libro);
+            _context.SaveChanges();
+            TempData["Mensaje"] = "Libro actualizado correctamente.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var libro = _context.Libros.Find(id);
+            return libro == null ? NotFound() : View(libro);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var libro = _context.Libros.Find(id);
+            if (libro == null)
+            {
+                return NotFound();
+            }
+
+            _context.Libros.Remove(libro);
+            _context.SaveChanges();
+            TempData["Mensaje"] = "Libro eliminado correctamente.";
+
             return RedirectToAction(nameof(Index));
         }
     }
