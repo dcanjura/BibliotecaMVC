@@ -1,0 +1,51 @@
+@model BibliotecaMVC.ViewModels.RegistroViewModel
+
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="row justify-content-center cuenta-contenedor">
+    <div class="col-md-8 col-lg-6">
+        <div class="card cuenta-tarjeta shadow-sm">
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <h1 class="h3">Crear cuenta</h1>
+                    <p class="text-muted mb-0">Regístrate para utilizar Biblioteca Virtual.</p>
+                </div>
+
+                <form asp-action="Registro" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="mb-3">
+                        <label asp-for="Usuario" class="form-label"></label>
+                        <input asp-for="Usuario" class="form-control" autocomplete="username" />
+                        <span asp-validation-for="Usuario" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CorreoElectronico" class="form-label"></label>
+                        <input asp-for="CorreoElectronico" class="form-control" autocomplete="email" />
+                        <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Contrasena" class="form-label"></label>
+                        <input asp-for="Contrasena" class="form-control" autocomplete="new-password" />
+                        <span asp-validation-for="Contrasena" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ConfirmarContrasena" class="form-label"></label>
+                        <input asp-for="ConfirmarContrasena" class="form-control" autocomplete="new-password" />
+                        <span asp-validation-for="ConfirmarContrasena" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Registrarme</button>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    ¿Ya tienes una cuenta? <a asp-action="Login">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
