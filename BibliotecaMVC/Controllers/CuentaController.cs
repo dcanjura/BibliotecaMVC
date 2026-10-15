@@ -1,3 +1,4 @@
+using BibliotecaMVC.Data;
 using BibliotecaMVC.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,15 +20,16 @@ namespace BibliotecaMVC.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string? returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel modelo)
+        public async Task<IActionResult> Login(LoginViewModel modelo, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -45,6 +47,11 @@ namespace BibliotecaMVC.Controllers
                 if (resultado.Succeeded)
                 {
                     TempData["Mensaje"] = "Sesión iniciada correctamente.";
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -78,6 +85,7 @@ namespace BibliotecaMVC.Controllers
             var resultado = await _userManager.CreateAsync(usuario, modelo.Contrasena);
             if (resultado.Succeeded)
             {
+                await _userManager.AddToRoleAsync(usuario, RolesBiblioteca.Lector);
                 await _signInManager.SignInAsync(usuario, isPersistent: false);
                 TempData["Mensaje"] = "Usuario registrado correctamente.";
                 return RedirectToAction("Index", "Home");
@@ -89,6 +97,12 @@ namespace BibliotecaMVC.Controllers
             }
 
             return View(modelo);
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccesoDenegado()
+        {
+            return View();
         }
 
         [HttpPost]
