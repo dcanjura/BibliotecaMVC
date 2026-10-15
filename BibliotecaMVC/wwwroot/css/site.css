@@ -133,6 +133,10 @@ body {
   font-weight: 600;
 }
 
+.acceso-denegado {
+  padding: 45px 0;
+}
+
 .libro-detalle img {
   width: 100%;
   max-height: 520px;
