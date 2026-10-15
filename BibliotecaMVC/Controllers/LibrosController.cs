@@ -1,9 +1,11 @@
 using BibliotecaMVC.Data;
 using BibliotecaMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaMVC.Controllers
 {
+    [Authorize]
     public class LibrosController : Controller
     {
         private readonly BibliotecaDbContext _context;
@@ -13,12 +15,14 @@ namespace BibliotecaMVC.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = RolesBiblioteca.Administrador + "," + RolesBiblioteca.Lector)]
         public IActionResult Index()
         {
             var libros = _context.Libros.OrderBy(libro => libro.Titulo).ToList();
             return View(libros);
         }
 
+        [Authorize(Roles = RolesBiblioteca.Administrador)]
         public IActionResult Create()
         {
             return View();
@@ -26,6 +30,7 @@ namespace BibliotecaMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RolesBiblioteca.Administrador)]
         public IActionResult Create(Libro libro)
         {
             if (!ModelState.IsValid)
@@ -41,6 +46,7 @@ namespace BibliotecaMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = RolesBiblioteca.Administrador)]
         public IActionResult Edit(int id)
         {
             var libro = _context.Libros.Find(id);
@@ -49,6 +55,7 @@ namespace BibliotecaMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RolesBiblioteca.Administrador)]
         public IActionResult Edit(int id, Libro libro)
         {
             if (id != libro.ID)
@@ -74,6 +81,7 @@ namespace BibliotecaMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = RolesBiblioteca.Administrador)]
         public IActionResult Delete(int id)
         {
             var libro = _context.Libros.Find(id);
@@ -82,6 +90,7 @@ namespace BibliotecaMVC.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RolesBiblioteca.Administrador)]
         public IActionResult DeleteConfirmed(int id)
         {
             var libro = _context.Libros.Find(id);
