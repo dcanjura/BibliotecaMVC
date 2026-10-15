@@ -27,7 +27,13 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireNonAlphanumeric = false;
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<BibliotecaIdentityDbContext>();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Cuenta/Login";
+    options.AccessDeniedPath = "/Cuenta/AccesoDenegado";
+});
 
 var app = builder.Build();
 
@@ -51,5 +57,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    await IdentitySeedData.InicializarAsync(scope.ServiceProvider);
+}
 
 app.Run();
