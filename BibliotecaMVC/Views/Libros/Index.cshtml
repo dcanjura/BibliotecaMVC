@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Catálogo de Libros";
+    var puedeModificar = User.IsInRole("Admin") || User.IsInRole("Bibliotecario");
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -9,7 +10,7 @@
         <h1>@ViewData["Title"]</h1>
         <p class="text-muted">Hay @Model.Count() libros registrados</p>
     </div>
-    @if (User.IsInRole("Administrador"))
+    @if (puedeModificar)
     {
         <a class="btn btn-primary" asp-action="Create">Nuevo Libro</a>
     }
@@ -51,8 +52,8 @@
                     </span>
                 </div>
                 <div class="card-footer bg-white d-flex justify-content-between align-items-center">
-                    <span class="text-muted small">Biblioteca Virtual</span>
-                    @if (User.IsInRole("Administrador"))
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Details" asp-route-id="@libro.ID">Ver detalle</a>
+                    @if (puedeModificar)
                     {
                         <div>
                             <a class="btn btn-outline-warning btn-sm" asp-action="Edit" asp-route-id="@libro.ID">Editar</a>
