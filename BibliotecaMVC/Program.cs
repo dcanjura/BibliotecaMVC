@@ -12,6 +12,7 @@ builder.Services.AddRazorPages();
 // Registro Scoped. Cambie AutorServiceAlternativo por AutorService para
 // usar la otra implementación sin modificar AutoresController.
 builder.Services.AddScoped<IAutorService, AutorServiceAlternativo>();
+builder.Services.AddScoped<ILibroService, LibroService>();
 builder.Services.AddScoped<CategoriaRepository>();
 builder.Services.AddDbContext<BibliotecaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BibliotecaConexion")));
