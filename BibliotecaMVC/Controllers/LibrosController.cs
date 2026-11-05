@@ -1,5 +1,6 @@
 using BibliotecaMVC.Data;
 using BibliotecaMVC.Models;
+using BibliotecaMVC.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,12 +9,12 @@ namespace BibliotecaMVC.Controllers
     [Authorize]
     public class LibrosController : Controller
     {
-        private readonly BibliotecaDbContext _context;
+        private readonly ILibroService _libroService;
         private readonly ILogger<LibrosController> _logger;
 
-        public LibrosController(BibliotecaDbContext context, ILogger<LibrosController> logger)
+        public LibrosController(ILibroService libroService, ILogger<LibrosController> logger)
         {
-            _context = context;
+            _libroService = libroService;
             _logger = logger;
         }
 
@@ -24,8 +25,7 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                var libros = _context.Libros.OrderBy(libro => libro.Titulo).ToList();
-                return View(libros);
+                return View(_libroService.ObtenerLibros());
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                var libro = _context.Libros.Find(id);
+                var libro = _libroService.ObtenerPorId(id);
                 if (libro == null)
                 {
                     _logger.LogWarning("No se encontró el libro con ID {LibroId}.", id);
@@ -79,8 +79,7 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                _context.Libros.Add(libro);
-                _context.SaveChanges();
+                _libroService.Agregar(libro);
                 _logger.LogInformation("Libro creado correctamente con ID {LibroId}.", libro.ID);
                 TempData["Mensaje"] = "Libro agregado correctamente.";
                 return RedirectToAction(nameof(Index));
@@ -99,7 +98,7 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                var libro = _context.Libros.Find(id);
+                var libro = _libroService.ObtenerPorId(id);
                 if (libro == null)
                 {
                     _logger.LogWarning("No se encontró el libro con ID {LibroId} para editar.", id);
@@ -136,15 +135,12 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                var libroExistente = _context.Libros.Find(id);
-                if (libroExistente == null)
+                if (!_libroService.Actualizar(libro))
                 {
                     _logger.LogWarning("No se encontró el libro con ID {LibroId} para actualizar.", id);
                     return NotFound();
                 }
 
-                _context.Libros.Update(libro);
-                _context.SaveChanges();
                 _logger.LogInformation("Libro con ID {LibroId} actualizado correctamente.", id);
                 TempData["Mensaje"] = "Libro actualizado correctamente.";
                 return RedirectToAction(nameof(Index));
@@ -163,7 +159,7 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                var libro = _context.Libros.Find(id);
+                var libro = _libroService.ObtenerPorId(id);
                 if (libro == null)
                 {
                     _logger.LogWarning("No se encontró el libro con ID {LibroId} para eliminar.", id);
@@ -188,15 +184,12 @@ namespace BibliotecaMVC.Controllers
 
             try
             {
-                var libro = _context.Libros.Find(id);
-                if (libro == null)
+                if (!_libroService.Eliminar(id))
                 {
                     _logger.LogWarning("No se encontró el libro con ID {LibroId} para confirmar la eliminación.", id);
                     return NotFound();
                 }
 
-                _context.Libros.Remove(libro);
-                _context.SaveChanges();
                 _logger.LogInformation("Libro con ID {LibroId} eliminado correctamente.", id);
                 TempData["Mensaje"] = "Libro eliminado correctamente.";
                 return RedirectToAction(nameof(Index));
